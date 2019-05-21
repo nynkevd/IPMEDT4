@@ -19,4 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/match', 'MatchingController@maakMatch')->middleware('auth');
+Route::get('/match/{user}', 'MatchingController@maakMatch');

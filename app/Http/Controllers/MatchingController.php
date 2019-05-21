@@ -7,12 +7,11 @@ use DB;
 
 class MatchingController extends Controller
 {
-  public function maakMatch(){
+  public function maakMatch($currentUser){
 
-    // Deze controller kijkt wat voor matches de ingelogde user heeft
+    // Deze controller kijkt wat voor matches de meegegeven user heeft
     // Op basis van de interesses van de user en de andere users
 
-    $currentUser = \Auth::user()->username;
     $interesses = DB::table('user_interests')->where(['user' => $currentUser])->pluck('interest');  //INteresse van currect User
     $matches = [];
     $users = DB::table('users')->pluck('username'); // Alle andere users
@@ -25,7 +24,7 @@ class MatchingController extends Controller
       if($user != $currentUser){
         $userInteresses = DB::table('user_interests')->where(['user' => $user])->pluck('interest'); // Interesse 1 van de user opvragen
 
-        //INteresses vergelijken 
+        //INteresses vergelijken
         foreach($userInteresses as $userInteresse){
           foreach($interesses as $interesse){
             if($interesse == $userInteresse){
@@ -36,9 +35,9 @@ class MatchingController extends Controller
           }
         }
       }
-      // Maak een array met alle users en de betreffende matches. 
+      // Maak een array met alle users en de betreffende matches.
       if ($match) {
-        array_push($matches, [$user => $userArr]);
+        $matches[$user] = $userArr;
         $match = false;
       }
     }
