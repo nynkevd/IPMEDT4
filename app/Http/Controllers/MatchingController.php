@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Users;
+use App\UserInterests;
 
 class MatchingController extends Controller
 {
@@ -12,17 +14,17 @@ class MatchingController extends Controller
     // Deze controller kijkt wat voor matches de meegegeven user heeft
     // Op basis van de interesses van de user en de andere users
 
-    $interesses = DB::table('user_interests')->where(['user' => $currentUser])->pluck('interest');  //INteresse van currect User
+    $interesses = UserInterests::where(['user' => $currentUser])->pluck('interest');  //INteresse van currect User
     $matches = [];
-    $users = DB::table('users')->pluck('username'); // Alle andere users
+    $users = Users::pluck('username'); // Alle andere users
     $match = false;
 
     // Per user kijken of ze een matching interesse hebben
     foreach($users as $user){
       $userArr = [];
       // De ingelogde user wordt niet meegenomen voor de matches
-      if($user != $currentUser){
-        $userInteresses = DB::table('user_interests')->where(['user' => $user])->pluck('interest'); // Interesse 1 van de user opvragen
+      if(strtolower($user) != $currentUser){
+        $userInteresses = UserInterests::where(['user' => $user])->pluck('interest'); // Interesse 1 van de user opvragen
 
         //INteresses vergelijken
         foreach($userInteresses as $userInteresse){
