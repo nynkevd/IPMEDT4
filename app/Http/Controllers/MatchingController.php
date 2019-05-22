@@ -23,7 +23,7 @@ class MatchingController extends Controller
     foreach($users as $user){
       $userArr = [];
       // De ingelogde user wordt niet meegenomen voor de matches
-      if(strtolower($user) != $currentUser){
+      if(strtolower($user) != strtolower($currentUser)){
         $userInteresses = UserInterests::where(['user' => $user])->pluck('interest'); // Interesse 1 van de user opvragen
 
         //INteresses vergelijken
