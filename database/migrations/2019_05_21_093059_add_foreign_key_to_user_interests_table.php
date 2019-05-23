@@ -14,7 +14,7 @@ class AddForeignKeyToUserInterestsTable extends Migration
     public function up()
     {
         Schema::table('user_interests', function (Blueprint $table) {
-          $table->foreign('user')->references('username')->on('users');
+          // $table->foreign('user')->references('username')->on('users');
           $table->foreign('interest')->references('interest')->on('interests');
         });
     }
