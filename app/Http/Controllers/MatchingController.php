@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
-use App\Users;
+use App\Accounts;
 use App\UserInterests;
 
 class MatchingController extends Controller
@@ -16,7 +15,7 @@ class MatchingController extends Controller
 
     $interesses = UserInterests::where(['user' => $currentUser])->pluck('interest');  //INteresse van currect User
     $matches = [];
-    $users = Users::pluck('username'); // Alle andere users
+    $users = Accounts::pluck('username'); // Alle andere users
     $match = false;
 
     // Per user kijken of ze een matching interesse hebben
