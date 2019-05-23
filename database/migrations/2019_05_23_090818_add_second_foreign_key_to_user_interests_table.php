@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddForeignKeyToUserInterestsTable extends Migration
+class AddSecondForeignKeyToUserInterestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddForeignKeyToUserInterestsTable extends Migration
     public function up()
     {
         Schema::table('user_interests', function (Blueprint $table) {
-          $table->foreign('user')->references('username')->on('accounts');
-          // $table->foreign('interest')->references('interest')->on('interests');
+            $table->foreign('user')->references('username')->on('accounts');
         });
     }
 
