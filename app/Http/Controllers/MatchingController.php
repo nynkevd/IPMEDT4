@@ -13,24 +13,25 @@ class MatchingController extends Controller
     // Deze controller kijkt wat voor matches de meegegeven user heeft
     // Op basis van de interesses van de user en de andere users
 
-    $interesses = UserInterests::where(['user' => $currentUser])->pluck('interest');  //INteresse van currect User
+    $currentInterests = UserInterests::where(['user' => $currentUser])->pluck('interest');  //Interesses van currect User
     $matches = [];
     $users = Accounts::pluck('username'); // Alle andere users
     $match = false;
 
     // Per user kijken of ze een matching interesse hebben
     foreach($users as $user){
-      $userArr = [];
-      // De ingelogde user wordt niet meegenomen voor de matches
-      if(strtolower($user) != strtolower($currentUser)){
-        $userInteresses = UserInterests::where(['user' => $user])->pluck('interest'); // Interesse 1 van de user opvragen
+      $interestArr = []; // Overeenkomende interesses
 
-        //INteresses vergelijken
-        foreach($userInteresses as $userInteresse){
-          foreach($interesses as $interesse){
-            if($interesse == $userInteresse){
+      // De current user wordt niet meegenomen voor de matches
+      if(strtolower($user) != strtolower($currentUser)){
+        $userInterests = UserInterests::where(['user' => $user])->pluck('interest'); // Alle interesses van de user worden opgevraagd
+
+        //Interesses van de twee users vergelijken
+        foreach($userInterests as $userInterest){
+          foreach($currentInterests as $currentInterest){
+            if($currentInterest == $userInterest){
               // Maak een array met de matchende interesses bij deze 'andere' user
-              array_push($userArr, $userInteresse);
+              array_push($interestArr, $currentInterest);
               $match = true;
             }
           }
@@ -38,7 +39,7 @@ class MatchingController extends Controller
       }
       // Maak een array met alle users en de betreffende matches.
       if ($match) {
-        $matches[$user] = $userArr;
+        $matches[$user] = $interestArr;
         $match = false;
       }
     }
