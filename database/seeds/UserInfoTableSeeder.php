@@ -12,12 +12,43 @@ class UserInfoTableSeeder extends Seeder
     public function run()
     {
         //
+        // DB::table('user_info')->insert([
+        //   'username' => 'Nynke',
+        //   'profile_picture' => 1,
+        //   'to' => "Leiden",
+        //   'from' => "De Vink",
+        //   'age' => 18
+        // ]);
         DB::table('user_info')->insert([
-          'username' => 'Nynke',
-          'profile_picture' => 1,
-          'to' => "Leiden",
-          'from' => "De Vink",
+          'username' => 'Lara',
+          'profile_picture' => 3,
+          'to' => "Alphen",
+          'from' => "Leiden",
           'age' => 18
+        ]);
+
+        DB::table('user_info')->insert([
+          'username' => 'Noa',
+          'profile_picture' => 2,
+          'to' => "Nieuw-Vennep",
+          'from' => "Leiden",
+          'age' => 18
+        ]);
+
+        DB::table('user_info')->insert([
+          'username' => 'Dayella',
+          'profile_picture' => 1,
+          'to' => "Nieuw-Vennep",
+          'from' => "Leiden",
+          'age' => 19
+        ]);
+
+        DB::table('user_info')->insert([
+          'username' => 'Anouk',
+          'profile_picture' => 3,
+          'to' => "Voorschoten",
+          'from' => "Leiden",
+          'age' => 20 
         ]);
     }
 }
