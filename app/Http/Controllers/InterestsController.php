@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\UserInterests;
+use App\Interests;
 
 class InterestsController extends Controller
 {
@@ -13,5 +14,11 @@ class InterestsController extends Controller
       $currentInterests = UserInterests::where(['user' => $currentUser])->pluck('interest');
 
       return $currentInterests;
+    }
+
+    public function getAllInterests(){
+    	$interests = Interests::pluck('interest');
+
+    	return $interests;
     }
 }
