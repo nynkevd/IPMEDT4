@@ -17,6 +17,7 @@ Route::middleware('auth:api')->get('/interests/{user}', 'InterestsController@get
 Route::middleware('auth:api')->get('/interests', 'InterestsController@getAllInterests')->middleware('cors');
 Route::middleware('auth:api')->get('/pictures', 'ProfilePicturesContoller@getProfilePictures')->middleware('cors');
 Route::middleware('auth:api')->get('/userinfo/{user}', 'UserInfoController@getUserInfo')->middleware('cors');
+Route::middleware('auth:api')->get('/friends/{user}', 'FriendController@getFriends')->middleware('cors');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
