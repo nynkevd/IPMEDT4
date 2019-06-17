@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Accounts;
 use App\UserInterests;
+use App\UserInfo;
+use DB;
 
 class MatchingController extends Controller
 {
@@ -18,28 +20,37 @@ class MatchingController extends Controller
     $users = Accounts::pluck('username'); // Alle andere users
     $match = false;
 
+    $allUserInfo = UserInfo::all();
+    $userInfo = UserInfo::where(['username' => $currentUser])->get();
+    $travelTo = $userInfo[0]->travelTo;
+    $travelFrom = $userInfo[0]->travelFrom;
+
     // Per user kijken of ze een matching interesse hebben
-    foreach($users as $user){
+    foreach($allUserInfo as $user){
       $interestArr = []; // Overeenkomende interesses
 
       // De current user wordt niet meegenomen voor de matches
-      if(strtolower($user) != strtolower($currentUser)){
-        $userInterests = UserInterests::where(['user' => $user])->pluck('interest'); // Alle interesses van de user worden opgevraagd
+      if(strtolower($user->username) != strtolower($currentUser)){
+        $userInterests = UserInterests::where(['user' => $user->username])->pluck('interest'); // Alle interesses van de user worden opgevraagd
 
-        //Interesses van de twee users vergelijken
-        foreach($userInterests as $userInterest){
-          foreach($currentInterests as $currentInterest){
-            if($currentInterest == $userInterest){
-              // Maak een array met de matchende interesses bij deze 'andere' user
-              array_push($interestArr, $currentInterest);
-              $match = true;
+        // Controleer of de gebruikers hetzelfde reistraject hebben. Hierbij wordt geen onderscheid gemaakt tussen 'van' en 'naar'
+        if((($user->travelFrom == $travelFrom) || ($user->travelFrom == $travelTo)) && (($user->travelTo == $travelFrom) || ($user->travelTo == $travelTo))){
+          //Interesses van de twee users vergelijken
+          foreach($userInterests as $userInterest){
+            foreach($currentInterests as $currentInterest){
+              if($currentInterest == $userInterest){
+                // Maak een array met de matchende interesses bij deze 'andere' user
+                array_push($interestArr, $currentInterest);
+                $match = true;
+              }
             }
           }
         }
       }
+
       // Maak een array met alle users en de betreffende matches.
       if ($match) {
-        $matches[$user] = $interestArr;
+        $matches[$user->username] = $interestArr;
         $match = false;
       }
     }
