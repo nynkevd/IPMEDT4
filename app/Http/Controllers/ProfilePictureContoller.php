@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ProfilePictures;
 
-class ProfilePicturesContoller extends Controller
+class ProfilePictureContoller extends Controller
 {
     public function getProfilePictures(){
       $pictures = ProfilePictures::pluck('link');

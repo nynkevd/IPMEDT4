@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\UserInterests;
 use App\Interests;
 
-class InterestsController extends Controller
+class InterestController extends Controller
 {
     public function getInterests($currentUser){
       // Deze controller geeft op basis van de ingelogde user de interesses van de users

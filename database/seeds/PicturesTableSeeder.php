@@ -11,25 +11,25 @@ class PicturesTableSeeder extends Seeder
      */
     public function run()
     {
-      // DB::table('pictures')->insert([
-      //   'id'=> 1,
-      //   'link' => "/img/aap.jpeg"
-      // ]);
-      //
-      // DB::table('pictures')->insert([
-      //   'id'=> 2,
-      //   'link' => "."
-      // ]);
-      //
-      // DB::table('pictures')->insert([
-      //   'id'=> 3,
-      //   'link' => "/img/beest.png"
-      // ]);
-      //
-      // DB::table('pictures')->insert([
-      //   'id'=> 4,
-      //   'link' => "/img/geitje.png"
-      // ]);
+      DB::table('pictures')->insert([
+        'id'=> 1,
+        'link' => "/img/aap.jpeg"
+      ]);
+
+      DB::table('pictures')->insert([
+        'id'=> 2,
+        'link' => "/img/alpaca.png"
+      ]);
+
+      DB::table('pictures')->insert([
+        'id'=> 3,
+        'link' => "/img/beest.png"
+      ]);
+
+      DB::table('pictures')->insert([
+        'id'=> 4,
+        'link' => "/img/geitje.png"
+      ]);
 
       DB::table('pictures')->insert([
         'id'=> 5,
