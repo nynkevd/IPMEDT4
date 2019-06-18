@@ -22,8 +22,8 @@ class MatchingController extends Controller
 
     $allUserInfo = UserInfo::all();
     $userInfo = UserInfo::where(['username' => $currentUser])->get();
-    $travelTo = $userInfo[0]->travelTo;
-    $travelFrom = $userInfo[0]->travelFrom;
+    $travelTo = $userInfo[0]->travel_to;
+    $travelFrom = $userInfo[0]->travel_from;
 
     // Per user kijken of ze een matching interesse hebben
     foreach($allUserInfo as $user){
@@ -34,7 +34,7 @@ class MatchingController extends Controller
         $userInterests = UserInterests::where(['user' => $user->username])->pluck('interest'); // Alle interesses van de user worden opgevraagd
 
         // Controleer of de gebruikers hetzelfde reistraject hebben. Hierbij wordt geen onderscheid gemaakt tussen 'van' en 'naar'
-        if((($user->travelFrom == $travelFrom) || ($user->travelFrom == $travelTo)) && (($user->travelTo == $travelFrom) || ($user->travelTo == $travelTo))){
+        if((($user->travel_from == $travelFrom) || ($user->travel_from == $travelTo)) && (($user->travel_to == $travelFrom) || ($user->travel_to == $travelTo))){
           //Interesses van de twee users vergelijken
           foreach($userInterests as $userInterest){
             foreach($currentInterests as $currentInterest){
