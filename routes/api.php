@@ -12,7 +12,14 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::middleware('auth:api')->get('/match/{user}', 'MatchingController@maakMatch');
+Route::middleware('auth:api')->get('/account/{user}', 'AccountController@getAccountInfoFromUser')->middleware('cors');
+Route::middleware('auth:api')->get('/match/{user}', 'MatchingController@maakMatch')->middleware('cors');
+Route::middleware('auth:api')->get('/matchwithroute/{user}/{travel_to}/{travel_from}', 'MatchingController@maakMatchWithRoute')->middleware('cors');
+Route::middleware('auth:api')->get('/interests/{user}', 'InterestController@getInterests')->middleware('cors');
+Route::middleware('auth:api')->get('/interests', 'InterestController@getAllInterests')->middleware('cors');
+Route::middleware('auth:api')->get('/pictures', 'ProfilePictureContoller@getProfilePictures')->middleware('cors');
+Route::middleware('auth:api')->get('/userinfo/{user}', 'UserInfoController@getUserInfo')->middleware('cors');
+Route::middleware('auth:api')->get('/friends/{user}', 'FriendController@getFriends')->middleware('cors');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
