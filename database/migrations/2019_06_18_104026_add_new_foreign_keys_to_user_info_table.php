@@ -14,7 +14,7 @@ class AddNewForeignKeysToUserInfoTable extends Migration
     public function up()
     {
         Schema::table('user_info', function (Blueprint $table) {
-            $table->foreign('travel_to')->references('station')->on('stations');
+            //$table->foreign('travel_to')->references('station')->on('stations');
             $table->foreign('travel_from')->references('station')->on('stations');
         });
     }

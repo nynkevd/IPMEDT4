@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 */
 Route::middleware('auth:api')->get('/account/{user}', 'AccountController@getAccountInfoFromUser')->middleware('cors');
 Route::middleware('auth:api')->get('/match/{user}', 'MatchingController@maakMatch')->middleware('cors');
+Route::middleware('auth:api')->get('/matchwithroute/{user}/{travel_to}/{travel_from}', 'MatchingController@maakMatchWithRoute')->middleware('cors');
 Route::middleware('auth:api')->get('/interests/{user}', 'InterestController@getInterests')->middleware('cors');
 Route::middleware('auth:api')->get('/interests', 'InterestController@getAllInterests')->middleware('cors');
 Route::middleware('auth:api')->get('/pictures', 'ProfilePictureContoller@getProfilePictures')->middleware('cors');
