@@ -20,6 +20,8 @@ Route::middleware('auth:api')->get('/interests', 'InterestController@getAllInter
 Route::middleware('auth:api')->get('/pictures', 'ProfilePictureContoller@getProfilePictures')->middleware('cors');
 Route::middleware('auth:api')->get('/userinfo/{user}', 'UserInfoController@getUserInfo')->middleware('cors');
 Route::middleware('auth:api')->get('/friends/{user}', 'FriendController@getFriends')->middleware('cors');
+Route::middleware('auth:api')->get('/account/{user}', 'AccountController@getAccountInfoFromUser')->middleware('cors');
+Route::middleware('auth:api')->get('/stations', 'StationController@getStations')->middleware('cors');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
